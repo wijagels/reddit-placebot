@@ -12,6 +12,7 @@ module.exports = function (rawBoardBuffer, rawTargetBuffer) {
   let targetBuffer = bmp.decode(rawTargetBuffer).data
   let boardBuffer = bmp.decode(rawBoardBuffer).data
 
+  let targets = []
   let len = targetBuffer.byteLength
   for (let i = 0; i < len-4; i += 4) {
     let val = targetBuffer.readUIntBE(i, 4)
@@ -22,9 +23,12 @@ module.exports = function (rawBoardBuffer, rawTargetBuffer) {
         let x = n % 1000
         let y = Math.floor(n / 1000)
         let color = colors.byInt.indexOf(val)
-        return { x: x, y: y, color: color }
+        targets.push({x: x, y: y, color: color})
       }
     }
+  }
+  if (targets.length > 0) {
+    return targets[Math.floor(Math.random(targets.length))]
   }
 
   return null
