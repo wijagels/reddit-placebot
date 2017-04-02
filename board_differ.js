@@ -13,10 +13,12 @@ module.exports = function (rawBoardBuffer, rawTargetBuffer) {
   let boardBuffer = bmp.decode(rawBoardBuffer).data
 
   let targets = []
+  let total = 0
   let len = targetBuffer.byteLength
   for (let i = 0; i < len-4; i += 4) {
     let val = targetBuffer.readUIntBE(i, 4)
     if (val !== TRANSPARENT) {
+      total++
       let boardVal = boardBuffer.readUIntBE(i, 4)
       if (boardVal !== val) {
         let n = (i/4)
@@ -30,10 +32,14 @@ module.exports = function (rawBoardBuffer, rawTargetBuffer) {
       }
     }
   }
-  console.log("Available targets: " + targets.length);
+  console.log("Available targets: " + targets.length + "/" + total + " (" + round(100*(1 - targets.length / total), 2) + "%)");
   if (targets.length > 0) {
     return targets[Math.floor(Math.random(targets.length))]
   }
 
   return null
+}
+
+function round(value, decimals) {
+  return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
 }
