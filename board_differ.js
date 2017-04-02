@@ -23,7 +23,10 @@ module.exports = function (rawBoardBuffer, rawTargetBuffer) {
         let x = n % 1000
         let y = Math.floor(n / 1000)
         let color = colors.byInt.indexOf(val)
-        targets.push({x: x, y: y, color: color})
+        if (color == -1)
+          console.log("Bad color " + val + " x,y: " + x + "," + y)
+        else
+          targets.push({x: x, y: y, color: color})
       }
     }
   }
