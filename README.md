@@ -7,7 +7,7 @@ This is a fork of the Argentina flag maintenance script specialized for ArchLinu
 You need to have [NodeJS installed](https://nodejs.org)
 
 ```
-git clone https://github.com/wijagels/reddit-place-bot
+git clone https://github.com/wijagels/reddit-placebot.git
 cd reddit-place-bot
 npm install
 ```
