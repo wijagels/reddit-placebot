@@ -32,7 +32,7 @@ module.exports = function (rawBoardBuffer, rawTargetBuffer) {
       }
     }
   }
-  console.log("Available targets: " + targets.length + "/" + total + " (" + round(100*(1 - targets.length / total), 2) + "%)");
+  console.log("Available targets: " + targets.length + "/" + total + " (" + round(100*(1 - targets.length / total), 2) + "% completed)");
   if (targets.length > 0) {
     return targets[Math.floor(Math.random(targets.length))]
   }
