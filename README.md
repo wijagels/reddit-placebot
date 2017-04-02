@@ -8,7 +8,7 @@ You need to have [NodeJS installed](https://nodejs.org)
 
 ```
 git clone https://github.com/wijagels/reddit-placebot.git
-cd reddit-place-bot
+cd reddit-placebot
 npm install
 ```
 
