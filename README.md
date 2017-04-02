@@ -7,6 +7,7 @@ This is a fork of the Argentina flag maintenance script specialized for ArchLinu
 You need to have [NodeJS installed](https://nodejs.org)
 
 ```
+sudo pacman -Sy nodejs npm
 git clone https://github.com/wijagels/reddit-placebot.git
 cd reddit-placebot
 npm install
@@ -39,7 +40,7 @@ an error, it's not smart enough to guess the colors based on similarity.
 ## Usage
 
 ```
-  npm run start
+  npm start
 ```
 
 It'll keep keep drawing forever and if it can't draw anymore it's gonna
