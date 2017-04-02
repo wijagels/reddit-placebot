@@ -30,6 +30,7 @@ module.exports = function (rawBoardBuffer, rawTargetBuffer) {
       }
     }
   }
+  console.log("Available targets: " + targets.length);
   if (targets.length > 0) {
     return targets[Math.floor(Math.random(targets.length))]
   }
