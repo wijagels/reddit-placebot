@@ -17,6 +17,7 @@
     "jimp": "^0.2.27",
     "nodemon": "^1.11.0",
     "prettyjson": "^1.2.1",
-    "request": "^2.81.0"
+    "request": "^2.81.0",
+    "xdg-basedir": "^3.0.0"
   }
 }

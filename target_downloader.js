@@ -1,13 +1,19 @@
 const fs = require('fs')
 const axios = require('axios')
+const path = require('path');
+const xdgBasedir = require('xdg-basedir')
 
-const config = require('./config')
+const cachedir = path.join(xdgBasedir.cache, 'reddit-placebot')
+const configdir = path.join(xdgBasedir.config, 'reddit-placebot')
+
+const config = require(path.join(configdir, '/config'))
+console.log(config);
 
 function load () {
   if (config.autoupdateRemoteTarget) {
     return fromUrl(config.REMOTE_TARGET_URL)
   } else {
-    return fromFile(config.TARGET_FILE)
+    return fromFile(path.join(cachedir, config.TARGET_FILE))
   }
 }
 
@@ -19,7 +25,7 @@ function fromUrl (url) {
   return axios.get(url, {
     responseType: 'arraybuffer'
   }).then(function (response) {
-    fs.writeFileSync(config.TARGET_FILE, response.data)
+    fs.writeFileSync(path.join(cachedir, config.TARGET_FILE), response.data)
     return response.data
   })
 }
