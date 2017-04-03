@@ -2,24 +2,49 @@ const fs = require('fs')
 const qs = require('querystring')
 const axios = require('axios')
 const Jimp = require('jimp')
+const path = require('path');
+const xdgBasedir = require('xdg-basedir')
 
-if (!fs.existsSync('./cookies.json')) fs.writeFileSync('cookies.json', '{}')
-if (!fs.existsSync('./queues.json')) fs.writeFileSync('queues.json', '{}')
+const cachedir = path.join(xdgBasedir.cache, 'placebot')
+if (!fs.existsSync(cachedir))
+    fs.mkdirSync(cachedir)
+if (!fs.existsSync(path.join(cachedir, '/cookies.json')))
+  fs.writeFileSync(path.join(cachedir, '/cookies.json'), '{}')
+if (!fs.existsSync(path.join(cachedir, '/queues.json')))
+  fs.writeFileSync(path.join(cachedir, '/queues.json'), '{}')
 
-const config = require('./config')
+const configdir = path.join(xdgBasedir.config, 'placebot')
+if (!fs.existsSync(configdir))
+    fs.mkdirSync(configdir)
+
+if (!fs.existsSync(path.join(configdir, '/config.js'))) {
+  console.error('Default config not found, making one at ' + path.join(configdir, '/config.js'))
+  copySync('./config.js', path.join(configdir, '/config.js'))
+}
+const config = require(path.join(configdir, '/config'))
+if (!fs.existsSync(path.join(configdir, '/users.json'))) {
+  console.error('ERROR: You need to make a users.json file in ' + configdir);
+  console.error('Follow the format {"username": "password", "otheruser": "otherpass"}')
+  process.exit(1);
+}
+const users = require(path.join(configdir, '/users'))
 
 const boardDownloader = require('./board_downloader')
 const targetDownloader = require('./target_downloader')
 const boardDiffer = require('./board_differ')
 
-const users = require('./users')
 const cookies = require('./cookies')
 const queues = require('./queues')
 
+function copySync(src, dest) {
+  if (!fs.existsSync(src)) {
+    return false;
+  }
 
-// boardDownloader.loadFromRawFile('_bitmap.bmp')
-// boardDownloader.load()
-// return
+  var data = fs.readFileSync(src, 'utf-8');
+  fs.writeFileSync(dest, data);
+}
+
 
 for (let user in users) { if (!queues[user]) scheduleUser(user) }
 startQueue()

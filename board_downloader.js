@@ -1,8 +1,12 @@
 const fs = require('fs')
 const axios = require('axios')
 const Jimp = require('jimp')
+const path = require('path');
+const xdgBasedir = require('xdg-basedir')
 
-const config = require('./config')
+const cachedir = path.join(xdgBasedir.cache, 'placebot')
+const configdir = path.join(xdgBasedir.config, 'placebot')
+const config = require(path.join(configdir,'/config'))
 const colors = require('./colors')
 
 function load () {
@@ -46,8 +50,8 @@ function saveAsBmp (buffer) {
   }
 
   return new Promise((resolve) => {
-    img.write(config.BOARD_FILE, function () {
-      resolve(fs.readFileSync(config.BOARD_FILE))
+    img.write(path.join(cachedir, config.BOARD_FILE), function () {
+      resolve(fs.readFileSync(path.join(cachedir, config.BOARD_FILE)))
     })
   })
 }
