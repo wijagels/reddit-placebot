@@ -33,8 +33,8 @@ const boardDownloader = require('./board_downloader')
 const targetDownloader = require('./target_downloader')
 const boardDiffer = require('./board_differ')
 
-const cookies = require('./cookies')
-const queues = require('./queues')
+const cookies = require(path.join(cachedir, '/cookies.json'))
+const queues = require(path.join(cachedir, '/queues.json'))
 
 function copySync(src, dest) {
   if (!fs.existsSync(src)) {
