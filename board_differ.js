@@ -47,7 +47,6 @@ module.exports = function (rawBoardBuffer, rawTargetBuffer) {
     for (n = 0; n < targets.length; n++) {
       if (targets[n].adjacent < max) break;
     }
-    console.log('targets', targets)
     return targets[Math.floor(Math.random() * n)];
   }
 
