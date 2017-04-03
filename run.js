@@ -19,7 +19,7 @@ if (!fs.existsSync(configdir))
 
 if (!fs.existsSync(path.join(configdir, '/config.js'))) {
   console.error('Default config not found, making one at ' + path.join(configdir, '/config.js'))
-  copySync('./config.js', path.join(configdir, '/config.js'))
+  copySync(path.join(__dirname, '/config.js'), path.join(configdir, '/config.js'))
 }
 const config = require(path.join(configdir, '/config'))
 if (!fs.existsSync(path.join(configdir, '/users.json'))) {
