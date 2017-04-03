@@ -5,7 +5,7 @@ const Jimp = require('jimp')
 const path = require('path');
 const xdgBasedir = require('xdg-basedir')
 
-const cachedir = path.join(xdgBasedir.cache, 'placebot')
+const cachedir = path.join(xdgBasedir.cache, 'reddit-placebot')
 if (!fs.existsSync(cachedir))
     fs.mkdirSync(cachedir)
 if (!fs.existsSync(path.join(cachedir, '/cookies.json')))
@@ -13,7 +13,7 @@ if (!fs.existsSync(path.join(cachedir, '/cookies.json')))
 if (!fs.existsSync(path.join(cachedir, '/queues.json')))
   fs.writeFileSync(path.join(cachedir, '/queues.json'), '{}')
 
-const configdir = path.join(xdgBasedir.config, 'placebot')
+const configdir = path.join(xdgBasedir.config, 'reddit-placebot')
 if (!fs.existsSync(configdir))
     fs.mkdirSync(configdir)
 

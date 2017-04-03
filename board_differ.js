@@ -1,7 +1,7 @@
 const path = require('path');
 const xdgBasedir = require('xdg-basedir')
 const bmp = require('bmp-js')
-const configdir = path.join(xdgBasedir.config, 'placebot')
+const configdir = path.join(xdgBasedir.config, 'reddit-placebot')
 const colors = require('./colors')
 
 // Takes the 2 buffers and returns a valid paint to make

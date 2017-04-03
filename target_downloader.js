@@ -3,8 +3,8 @@ const axios = require('axios')
 const path = require('path');
 const xdgBasedir = require('xdg-basedir')
 
-const cachedir = path.join(xdgBasedir.cache, 'placebot')
-const configdir = path.join(xdgBasedir.config, 'placebot')
+const cachedir = path.join(xdgBasedir.cache, 'reddit-placebot')
+const configdir = path.join(xdgBasedir.config, 'reddit-placebot')
 
 const config = require(path.join(configdir, '/config'))
 console.log(config);
